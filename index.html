@@ -100,17 +100,38 @@
   </section>
   <div class="cute-audio-player">
     <div class="player-controls">
-      <button id="prev">⏮️</button>
-      <button id="play">▶️</button>
-      <button id="next">⏭️</button>
-      <span class="track-title">Track 1/12 | Dil ne ye kaha hai dil se</span>
-      <span id="currentTime">0:00</span> / <span id="duration">2.50</span>
-    </div>
-    <input type="range" id="seekBar" value="0">
-    <audio id="audio" src="dil-ne-ye-kaha-hai-dil-se-cover-susmita-lovely-hindi-love-songs-dhadkan-202_bxVyLydS.mp3"></audio>
-  </div>
+      <button id="prev" aria-label="Previous Track">
+        <!-- Previous SVG with solid pink fill -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+          <path d="M11 18V6l-8.5 6L11 18zm1-12v12l8.5-6L12 6z" fill="#ff0066"/>
+        </svg>
+      </button>
   
-
+      <button id="play" aria-label="Play/Pause">
+        <!-- Play SVG with solid pink fill -->
+        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z" fill="#ff0066"/>
+        </svg>
+        <!-- Pause SVG (hidden by default, add via JavaScript) -->
+        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" style="display: none;">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="#ff0066"/>
+        </svg>
+      </button>
+  
+      <button id="next" aria-label="Next Track">
+        <!-- Next SVG with solid pink fill -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+          <path d="M13 6v12l8.5-6L13 6zm-1 0L3.5 12 12 18V6z" fill="#ff0066"/>
+        </svg>
+      </button>
+  
+      <span class="track-title">Track 1/12 | Dil Ne Ye Kaha Hai Dil Se (Cover)</span>
+      <span id="currentTime">0:00</span> / <span id="duration">2:50</span>
+    </div>
+  
+    <input type="range" id="seekBar" value="0" />
+    <audio id="audio" src="dil-ne-yeh-kaha-hain-dil-se-hd-video-song-akshay-suniel-shilpa-dhadkan-hindi_HyEKWQ4m.mp3"></audio>
+  </div>
       <section id="works">
         <h2>🎨 My Works</h2>
         <p>Here you'll find some of the things I've been working on. (Coming soon!)</p>
@@ -123,5 +144,25 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    const audio = document.getElementById("audio");
+    let hasPlayed = false;
+  
+    function tryAutoPlay() {
+      if (!hasPlayed) {
+        audio.play().then(() => {
+          console.log("Playing music 🎵");
+        }).catch(err => {
+          console.log("Autoplay blocked:", err);
+        });
+        hasPlayed = true;
+      }
+    }
+  
+    window.addEventListener("click", tryAutoPlay);
+    window.addEventListener("keydown", tryAutoPlay);
+  </script>
+  
+  
 </body>
 </html>
